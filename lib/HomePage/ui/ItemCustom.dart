@@ -3,6 +3,7 @@ import 'package:do_an2_1/Model/FlashSaleModel.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
+import '../../ItemDetail/ui/ItemDetailPage.dart';
 import '../../Model/ItemModel.dart';
 import '../../RateStar.dart';
 
@@ -21,8 +22,8 @@ class ItemCustom extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        // Navigator.pushNamed(context, ItemDetailPage.routeName,
-        //     arguments: {'id_item': itemModel.id});
+        Navigator.pushNamed(context, ItemDetailPage.routeName,
+            arguments: {'id_item': itemModel.id});
       },
       child: Container(
         decoration: BoxDecoration(
@@ -67,6 +68,8 @@ class ItemCustom extends StatelessWidget {
                 children: [
                   Text(
                     itemModel.name,
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
                     style: const TextStyle(
                         fontSize: 17, fontWeight: FontWeight.w600),
                   ),

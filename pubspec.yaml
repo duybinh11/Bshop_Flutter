@@ -36,9 +36,10 @@ dependencies:
   flutter:
     sdk: flutter
   flutter_bloc: ^8.1.3
+  flutter_rating_bar: ^4.0.1
   http: ^1.1.0
-  intl: ^0.18.1
   shared_preferences: ^2.2.2
+  vnpay_flutter: ^1.0.1
 
 dev_dependencies:
   flutter_lints: ^2.0.0
@@ -62,6 +63,11 @@ flutter:
     - assets/img/heart.png
     - assets/img/arrow.png
     - assets/img/user.png
+    - assets/img/waiting.png
+    - assets/img/check.png
+    - assets/img/sold.png
+    - assets/img/avt.png
+
   #   - images/a_dot_ham.jpeg
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

@@ -20,7 +20,7 @@ class _FiterItemState extends State<FiterItem> {
     CategoryModel(id: 0, name: 'All'),
     CategoryModel(id: 6, name: 'New'),
     CategoryModel(id: 1, name: 'Fashion'),
-    CategoryModel(id: 2, name: 'Food'),
+    // CategoryModel(id: 2, name: 'Food'),
     CategoryModel(id: 3, name: 'Sport'),
     CategoryModel(id: 4, name: 'SkinCare'),
     CategoryModel(id: 5, name: 'Book'),
@@ -36,6 +36,24 @@ class _FiterItemState extends State<FiterItem> {
     newValue = listCategory.first;
     priceOrder = priceSorts.first;
     super.initState();
+  }
+
+  void clickOrderPrice(String? value) {
+    setState(() {
+      value == 'Thấp đến cao'
+          ? context.read<HomeBloc>().add(EHomePageOrderByPrice(isASC: 1))
+          : context.read<HomeBloc>().add(EHomePageOrderByPrice(isASC: 0));
+      priceOrder = value;
+    });
+  }
+
+  void clickCategory(CategoryModel? value) {
+    setState(() {
+      context
+          .read<HomeBloc>()
+          .add(EHomePageGetItemByCategory(idCategory: value!.id));
+      newValue = value;
+    });
   }
 
   @override
@@ -78,16 +96,7 @@ class _FiterItemState extends State<FiterItem> {
                             child: Text(e),
                           ))
                       .toList(),
-                  onChanged: (value) => setState(() {
-                    value == 'Thấp đến cao'
-                        ? context
-                            .read<HomeBloc>()
-                            .add(EHomePageOrderByPrice(isASC: 1))
-                        : context
-                            .read<HomeBloc>()
-                            .add(EHomePageOrderByPrice(isASC: 0));
-                    priceOrder = value;
-                  }),
+                  onChanged: clickOrderPrice,
                 ),
               ),
             ),
@@ -112,26 +121,21 @@ class _FiterItemState extends State<FiterItem> {
                     color: Colors.grey.withOpacity(0.3),
                     borderRadius: const BorderRadius.all(Radius.circular(7))),
                 child: DropdownButton(
-                  isExpanded: true,
-                  focusColor: Colors.blue,
-                  iconEnabledColor: Colors.blue,
-                  value: newValue,
-                  style: const TextStyle(
-                      color: Colors.blue, fontWeight: FontWeight.w700),
-                  items: listCategory
-                      .map((e) => DropdownMenuItem(
-                            value: e,
-                            child: Text(
-                              e.name,
-                            ),
-                          ))
-                      .toList(),
-                  onChanged: (value1) => setState(() {
-                    context.read<HomeBloc>().add(
-                        EHomePageGetItemByCategory(idCategory: value1!.id));
-                    newValue = value1;
-                  }),
-                ),
+                    isExpanded: true,
+                    focusColor: Colors.blue,
+                    iconEnabledColor: Colors.blue,
+                    value: newValue,
+                    style: const TextStyle(
+                        color: Colors.blue, fontWeight: FontWeight.w700),
+                    items: listCategory
+                        .map((e) => DropdownMenuItem(
+                              value: e,
+                              child: Text(
+                                e.name,
+                              ),
+                            ))
+                        .toList(),
+                    onChanged: clickCategory),
               ),
             ),
           ],

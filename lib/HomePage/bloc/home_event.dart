@@ -21,6 +21,8 @@ class EHomePageOrderByPrice extends HomeEvent {
   });
 }
 
+class EHomePageDisableSearch extends HomeEvent {}
+
 class EHomePageSearchItem extends HomeEvent {
   String name;
   EHomePageSearchItem({

@@ -1,12 +1,25 @@
+import 'package:do_an2_1/BuyOrderDetail/bloc/buy_order_detail_bloc.dart';
+import 'package:do_an2_1/OrderDetailPage/bloc/order_detail_bloc.dart';
+import 'package:do_an2_1/ProfilePage/bloc/profile_bloc.dart';
+import 'package:do_an2_1/RateItemPage/ui/RateItemPage.dart';
+import 'package:do_an2_1/RegisterPage/bloc/register_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'Api/ApiAuth.dart';
+import 'BuyOrderDetail/ui/BuyOrderDetailPage.dart';
+import 'CartPage/bloc/cart_bloc.dart';
 import 'HomePage/bloc/home_bloc.dart';
+import 'ItemDetail/bloc/item_detail_bloc.dart';
+import 'ItemDetail/ui/ItemDetailPage.dart';
 import 'Login/bloc/login_bloc.dart';
 import 'Login/ui/LoginPage.dart';
 import 'ManagerPageHome/ui/ManagerPageHome.dart';
 import 'Model/UserModel.dart';
+import 'OrderDetailPage/uiCart/OrderDetailPage.dart';
+import 'OrderPage/bloc/order_page_bloc.dart';
+import 'RegisterPage/ui/RegisterPage.dart';
 import 'SimpleBlocObserver .dart';
+import 'VnPayPage.dart/ui/VnPayPage.dart';
 
 void main() {
   runApp(const MyApp());
@@ -32,29 +45,39 @@ class _MyAppState extends State<MyApp> {
         BlocProvider<HomeBloc>(
           create: (context) => HomeBloc(),
         ),
-        // BlocProvider<ItemDetailBloc>(
-        //   create: (context) => ItemDetailBloc(),
-        // ),
-        // BlocProvider<CartBloc>(
-        //   create: (context) => CartBloc(),
-        // ),
-        // BlocProvider<CartOrderBloc>(
-        //   create: (context) => CartOrderBloc(),
-        // ),
-        // BlocProvider<OrderBloc>(
-        //   create: (context) => OrderBloc(),
-        // ),
+        BlocProvider<ItemDetailBloc>(
+          create: (context) => ItemDetailBloc(),
+        ),
+        BlocProvider<ProfileBloc>(
+          create: (context) => ProfileBloc(),
+        ),
+        BlocProvider<RegisterBloc>(
+          create: (context) => RegisterBloc(),
+        ),
+        BlocProvider<CartBloc>(
+          create: (context) => CartBloc(),
+        ),
+        BlocProvider<OrderDetailBloc>(
+          create: (context) => OrderDetailBloc(),
+        ),
+        BlocProvider<OrderPageBloc>(
+          create: (context) => OrderPageBloc(),
+        ),
+        BlocProvider<BuyOrderDetailBloc>(
+          create: (context) => BuyOrderDetailBloc(),
+        ),
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         routes: {
-          LoginPage.routerName: (context) => const LoginPage(),
-          // RegisterPage.routeName: (context) => const RegisterPage(),
-          // ManagerPageHome.routeName: (context) => const ManagerPageHome(),
-          // ItemDetailPage.routeName: (context) => const ItemDetailPage(),
-          // VnPayPage.routeName: (context) => const VnPayPage(),
-          // CartOrderPage.routeName: (context) => const CartOrderPage(),
-          // VnPayOrderPage.routeName: (context) => const VnPayOrderPage()
+          LoginPage.routeName: (context) => const LoginPage(),
+          RegisterPage.routeName: (context) => const RegisterPage(),
+          ManagerPageHome.routeName: (context) => const ManagerPageHome(),
+          ItemDetailPage.routeName: (context) => const ItemDetailPage(),
+          VnPayPage.routeName: (context) => const VnPayPage(),
+          OrderDetailPage.routeName: (context) => const OrderDetailPage(),
+          BuyOrderDetailPage.routeName: (context) => const BuyOrderDetailPage(),
+          RateItemPage.routeName: (context) =>  const RateItemPage()
         },
         title: 'Flutter Demo',
         theme: ThemeData(
@@ -122,5 +145,14 @@ AlertDialog showdialogCustom(
         ),
       ),
     ],
+  );
+}
+
+AlertDialog showdialogLoading(BuildContext context) {
+  return const AlertDialog(
+    content: SizedBox(
+        height: 100,
+        width: 100,
+        child: Center(child: CircularProgressIndicator())),
   );
 }

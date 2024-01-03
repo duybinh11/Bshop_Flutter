@@ -8,16 +8,15 @@ class UserModel {
   String phone;
   String address;
   String token;
-  UserModel({
-    required this.id,
-    required this.email,
-    required this.username,
-    required this.phone,
-    required this.address,
-    required this.token
-  });
-
-  
+  String? img;
+  UserModel(
+      {required this.id,
+      required this.email,
+      required this.username,
+      required this.phone,
+      required this.address,
+      required this.img,
+      required this.token});
 
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
@@ -34,6 +33,7 @@ class UserModel {
     return UserModel(
       id: map['id'] as int,
       email: map['email'] as String,
+      img: map['img'] != null ? map['img'] as String : null,
       username: map['username'] as String,
       phone: map['phone'] as String,
       address: map['address'] as String,
@@ -43,5 +43,6 @@ class UserModel {
 
   String toJson() => json.encode(toMap());
 
-  factory UserModel.fromJson(String source) => UserModel.fromMap(json.decode(source) as Map<String, dynamic>);
+  factory UserModel.fromJson(String source) =>
+      UserModel.fromMap(json.decode(source) as Map<String, dynamic>);
 }

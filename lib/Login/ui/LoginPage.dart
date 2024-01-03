@@ -7,7 +7,7 @@ import '../bloc/login_bloc.dart';
 import 'FormLogin.dart';
 
 class LoginPage extends StatelessWidget {
-  static const routerName = '/LoginPage';
+  static const routeName = '/LoginPage';
   const LoginPage({super.key});
 
   @override
@@ -22,14 +22,14 @@ class LoginPage extends StatelessWidget {
                   showdialogCustom(context, 'Thông Báo', 'Đăng nhập thất bại'),
             );
           }
+          if (state is SLoginSuccess) {
+            Navigator.pushNamedAndRemoveUntil(
+                context, ManagerPageHome.routeName, (route) => false);
+          }
         },
         builder: (context, state) {
           if (state is SLoginLoading) {
             return const Center(child: CircularProgressIndicator());
-          }
-          if (state is SLoginSuccess) {
-  
-            return const ManagerPageHome();
           }
           return Column(
             crossAxisAlignment: CrossAxisAlignment.center,

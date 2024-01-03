@@ -45,4 +45,26 @@ class ApiAuth {
     final prefs = await SharedPreferences.getInstance();
     prefs.setString('token', token);
   }
+
+  Future<dynamic> RegisterAccount(String email, String pass, String phone,
+      String address, String username) async {
+    Uri uri = Uri.parse('http://10.0.2.2:8000/api/login/register');
+    http.Response response = await http.post(uri, body: {
+      'username': username,
+      'email': email,
+      'address': address,
+      'phone': phone,
+      'password': pass,
+    });
+    if (response.statusCode == 200) {
+      Map<String, dynamic> mapData = jsonDecode(response.body);
+      if (mapData['status']) {
+        return true;
+      } else {
+        // mapData['erorr'].toString();
+        return mapData['erorr'].toString();
+      }
+    }
+    return false;
+  }
 }

@@ -36,7 +36,7 @@ class ItemModel {
     };
   }
 
-  factory ItemModel.fromMapFlashSale(Map<String, dynamic> mapData) {
+  factory ItemModel.fromMap(Map<String, dynamic> mapData) {
     Map mapItem = mapData['item'];
     Map? mapFlashSale = mapData['flash_sale'];
     return ItemModel(
@@ -52,26 +52,37 @@ class ItemModel {
           : null,
     );
   }
-  factory ItemModel.fromMapByCategory(Map<String, dynamic> map) {
-    Map? mapFlashSale = map['flash_sale'];
+  factory ItemModel.fromMapItemCart(Map<String, dynamic> mapData) {
     return ItemModel(
-      id: map['id'] as int,
-      name: map['name'] as String,
-      price: map['price'] as int,
-      img: map['img'] as String,
-      descrip: map['descrip'] as String,
-      sold: map['sold'] as int,
-      rateStar: double.parse(map['rate_star'].toString()),
-      flashSaleModel: mapFlashSale != null
-          ? FlashSaleModel.fromMap(mapFlashSale as Map<String, dynamic>)
+      id: mapData['id'] as int,
+      name: mapData['name'] as String,
+      price: mapData['price'] as int,
+      img: mapData['img'] as String,
+      descrip: mapData['descrip'] as String,
+      sold: mapData['sold'] as int,
+      rateStar: double.parse(mapData['rate_star'].toString()),
+      flashSaleModel: mapData['flash_sale'] != null
+          ? FlashSaleModel.fromMap(
+              mapData['flash_sale'] as Map<String, dynamic>)
           : null,
     );
+  }
+  factory ItemModel.fromMapOrder(Map<String, dynamic> mapData) {
+    return ItemModel(
+        id: mapData['id'] as int,
+        name: mapData['name'] as String,
+        price: mapData['price'] as int,
+        img: mapData['img'] as String,
+        descrip: mapData['descrip'] as String,
+        sold: mapData['sold'] as int,
+        rateStar: 0.0,
+        flashSaleModel: null);
   }
 
   String toJson() => json.encode(toMap());
 
   factory ItemModel.fromJson(String source) =>
-      ItemModel.fromMapFlashSale(json.decode(source) as Map<String, dynamic>);
+      ItemModel.fromMap(json.decode(source) as Map<String, dynamic>);
 
   @override
   String toString() {

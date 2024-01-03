@@ -9,6 +9,7 @@ import 'package:do_an2_1/Model/ItemModel.dart';
 import 'package:dots_indicator/dots_indicator.dart';
 import 'package:flutter/material.dart';
 
+import '../../ItemDetail/ui/ItemDetailPage.dart';
 import '../../Model/FlashSaleModel.dart';
 
 // ignore: must_be_immutable
@@ -94,8 +95,8 @@ class BannerCustom extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        // Navigator.pushNamed(context, ItemDetailPage.routeName,
-        //     arguments: {'id_item': widget.itemDetalModel.itemModel.id});
+        Navigator.pushNamed(context, ItemDetailPage.routeName,
+            arguments: {'id_item': itemModel.id});
       },
       child: Stack(
         children: [

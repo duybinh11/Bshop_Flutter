@@ -1,3 +1,6 @@
+import 'package:do_an2_1/CartPage/ui/CartPage.dart';
+import 'package:do_an2_1/OrderPage/ui/OrderPage.dart';
+import 'package:do_an2_1/ProfilePage/ui/ProfilePage.dart';
 import 'package:flutter/material.dart';
 
 import '../../HomePage/ui/HomePage.dart';
@@ -29,8 +32,7 @@ class _ManagerPageHomeState extends State<ManagerPageHome> {
             i = value;
           });
         },
-        children: [HomePage()],
-        // children: const [HomePage(), CartPage(), OrderPage(), ProfilePage()],
+        children: const [HomePage(), CartPage(), OrderPage(), ProfilePage()],
       ),
       bottomNavigationBar: BottomNavigationBar(
         selectedItemColor: Colors.black,

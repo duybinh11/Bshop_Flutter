@@ -1,4 +1,5 @@
 import 'package:do_an2_1/Login/bloc/login_bloc.dart';
+import 'package:do_an2_1/RegisterPage/ui/RegisterPage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -12,9 +13,11 @@ class FormLogin extends StatefulWidget {
 class _FormLoginState extends State<FormLogin> {
   final keyForm = GlobalKey<FormState>();
 
-  final emailCtl = TextEditingController(text: 'duybinh1@gmail.com');
+  final emailCtl = TextEditingController();
 
-  final passCtl = TextEditingController(text: 'zxc123');
+  final passCtl = TextEditingController();
+
+  bool isVisible = false;
 
   @override
   void dispose() {
@@ -34,6 +37,10 @@ class _FormLoginState extends State<FormLogin> {
     context
         .read<LoginBloc>()
         .add(ELoginLogin(email: emailCtl.text, password: passCtl.text));
+  }
+
+  void clickCreateAccount() {
+    Navigator.pushNamed(context, RegisterPage.routeName);
   }
 
   @override
@@ -64,15 +71,26 @@ class _FormLoginState extends State<FormLogin> {
               const SizedBox(
                 height: 15,
               ),
-              TextFormField(
-                controller: passCtl,
-                decoration: const InputDecoration(
-                    labelText: 'Password',
-                    prefixIcon: Icon(
-                      Icons.password,
-                      color: Colors.blue,
-                    )),
-              ),
+              StatefulBuilder(
+                  builder: (BuildContext context, StateSetter setState) {
+                return TextFormField(
+                  controller: passCtl,
+                  obscureText: isVisible,
+                  decoration: InputDecoration(
+                      suffixIcon: GestureDetector(
+                        child: Icon(
+                          isVisible ? Icons.visibility : Icons.visibility_off,
+                          color: Colors.blue,
+                        ),
+                        onTap: () => setState(() => isVisible = !isVisible),
+                      ),
+                      labelText: 'Password',
+                      prefixIcon: const Icon(
+                        Icons.password,
+                        color: Colors.blue,
+                      )),
+                );
+              }),
               const SizedBox(
                 height: 15,
               ),
@@ -109,7 +127,7 @@ class _FormLoginState extends State<FormLogin> {
                     ),
                   ),
                   GestureDetector(
-                    onTap: () {},
+                    onTap: clickCreateAccount,
                     child: const Text(
                       'Tạo tài khoản',
                       style: TextStyle(

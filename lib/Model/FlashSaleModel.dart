@@ -17,8 +17,8 @@ class FlashSaleModel {
     return <String, dynamic>{
       'id': id,
       'percent': percent,
-      'time_start': timeStart.millisecondsSinceEpoch,
-      'time_end': timeEnd.millisecondsSinceEpoch,
+      'time_start': timeStart.toIso8601String(),
+      'time_end': timeEnd.toIso8601String(),
     };
   }
 

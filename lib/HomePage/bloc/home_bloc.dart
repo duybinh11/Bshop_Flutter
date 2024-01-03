@@ -13,13 +13,16 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
   List<ItemModel> listItem = [];
   int isASC = 1;
   int idCategory = 0;
+  bool searching = false;
   int currentPage = 1;
+  String nameSearch = '';
   HomeBloc() : super(HomeInitial()) {
     on<EHomeGetAllItem>(getAllItem);
     on<EHomePageGetItemByCategory>(getItemByCategory);
     on<EHomePageLoadMore>(loadMore);
     on<EHomePageOrderByPrice>(orderByPrice);
     on<EHomePageSearchItem>(searchItem);
+    on<EHomePageDisableSearch>(disableSearch);
   }
 
   FutureOr<void> getAllItem(
@@ -45,8 +48,15 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
     idCategory = event.idCategory;
     currentPage = 1;
     listItem.clear(); // delete when click category khác
-    List<ItemModel> listTemp =
-        await apiItem.getItemByCategory(currentPage, idCategory, isASC);
+    List<ItemModel> listTemp = [];
+    if (searching) {
+      listTemp =
+          await apiItem.searchItem(nameSearch, idCategory, isASC, currentPage);
+    } else {
+      listTemp =
+          await apiItem.getItemByCategory(currentPage, idCategory, isASC);
+    }
+
     if (listTemp.isEmpty) {
       emit(SHomePageGridEmpty());
     } else {
@@ -59,9 +69,16 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
       EHomePageLoadMore event, Emitter<HomeState> emit) async {
     emit(SHomeGetLoadingMore());
     currentPage++;
-    List<ItemModel> listTemp =
-        await apiItem.getItemByCategory(currentPage, idCategory, isASC);
-    await Future.delayed(const Duration(seconds: 1));
+    List<ItemModel> listTemp = [];
+    if (searching) {
+      // if seaching emit state suiable
+      listTemp =
+          await apiItem.searchItem(nameSearch, idCategory, isASC, currentPage);
+    } else {
+      listTemp =
+          await apiItem.getItemByCategory(currentPage, idCategory, isASC);
+    }
+
     if (listTemp.isEmpty) {
       emit(SHomeGetLoadMoreEmpty());
     } else {
@@ -79,12 +96,22 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
 
   FutureOr<void> searchItem(
       EHomePageSearchItem event, Emitter<HomeState> emit) async {
+    searching = true;
+    nameSearch = event.name;
+    currentPage = 1; //set page
     emit(SHomePageLoadingGrid());
-    List<ItemModel> listItem = await apiItem.searchItem(event.name);
+    List<ItemModel> listItem =
+        await apiItem.searchItem(nameSearch, idCategory, isASC, currentPage);
     if (listItem.isEmpty) {
       emit(SHomePageGridEmpty());
     } else {
       emit(SHomePageGridGetIem(listItem: listItem));
     }
+  }
+
+  FutureOr<void> disableSearch(
+      EHomePageDisableSearch event, Emitter<HomeState> emit) {
+    searching = false;
+    nameSearch = '';
   }
 }

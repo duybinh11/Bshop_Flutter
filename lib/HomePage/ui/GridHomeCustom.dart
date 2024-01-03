@@ -24,7 +24,7 @@ class GridHomeCustom extends StatelessWidget {
         return false;
       },
       builder: (context, state) {
-        if (state is SHomePageLoadingGrid) {
+        if (state is SHomePageLoadingGrid ) {
           return const SliverToBoxAdapter(
             child: Column(
               children: [
