@@ -16,15 +16,21 @@ class OrderPageBloc extends Bloc<OrderPageEvent, OrderPageState> {
   FutureOr<void> getOrderWaiting(
       EOrderPageGetOrder event, Emitter<OrderPageState> emit) async {
     emit(SOrderPagGetOrderLoading());
-    Map<String, dynamic> mapData =
-        await apiItem.getOrderWaiting(idUser: event.idUser);
-    if (mapData['status'] as bool) {
-      List<dynamic> listData = mapData['id_bill'];
-
-      emit(SOrderPageOrderGetOrder(
-          listBill: listData.map((e) => BillItemModel.fromMap(e)).toList()));
+    Map<String, dynamic> mapData = await apiItem.getOrderWaiting();
+    if (!(mapData['empty'] as bool)) {
+      if (mapData['status'] as bool) {
+        List<dynamic> listData = mapData['bill'];
+        List<BillItemModel> listBill =
+            listData.map((e) => BillItemModel.fromMap(e)).toList();
+        if (listBill.isEmpty) {
+        } else {
+          emit(SOrderPageOrderGetOrder(listBill: listBill));
+        }
+      } else {
+        emit(SOrderPageErorr());
+      }
     } else {
-      emit(SOrderPageErorr());
+      emit(SOrderPageGetOrderEmpty());
     }
   }
 }

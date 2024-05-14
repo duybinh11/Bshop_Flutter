@@ -1,8 +1,8 @@
 import 'package:do_an2_1/OrderPage/bloc/order_page_bloc.dart';
+import 'package:do_an2_1/main.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../Login/bloc/login_bloc.dart';
 import 'ItemOrderCustom.dart';
 
 // ignore: must_be_immutable
@@ -19,8 +19,7 @@ class _OrderBodyState extends State<OrderBody>
     with AutomaticKeepAliveClientMixin {
   @override
   void initState() {
-    int idUser = context.read<LoginBloc>().userModel!.id;
-    context.read<OrderPageBloc>().add(EOrderPageGetOrder(idUser: idUser));
+    context.read<OrderPageBloc>().add(EOrderPageGetOrder());
     super.initState();
   }
 
@@ -36,10 +35,7 @@ class _OrderBodyState extends State<OrderBody>
           return RefreshIndicator(
             onRefresh: () {
               return Future.sync(() {
-                int idUser = context.read<LoginBloc>().userModel!.id;
-                context
-                    .read<OrderPageBloc>()
-                    .add(EOrderPageGetOrder(idUser: idUser));
+                context.read<OrderPageBloc>().add(EOrderPageGetOrder());
               });
             },
             child: ListView.builder(
@@ -50,10 +46,20 @@ class _OrderBodyState extends State<OrderBody>
           );
         }
         if (state is SOrderPageGetOrderEmpty) {
-          return const Text('empty');
+          return RefreshIndicator(
+              onRefresh: () {
+                return Future.sync(() {
+                  context.read<OrderPageBloc>().add(EOrderPageGetOrder());
+                });
+              },
+              child: const Center(child: EmptyCustom()));
         }
         if (state is SOrderPageErorr) {
-          return const Text('erorr');
+          return ElevatedButton(
+              onPressed: () {
+                context.read<OrderPageBloc>().add(EOrderPageGetOrder());
+              },
+              child: const Text('load'));
         }
         return const Text('null');
       },

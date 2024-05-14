@@ -3,8 +3,8 @@ import 'dart:async';
 import 'package:bloc/bloc.dart';
 import 'package:do_an2_1/Api/ApiItem.dart';
 import 'package:do_an2_1/Api/ApiVnpay.dart';
+import 'package:do_an2_1/Model/BillItemModel.dart';
 import 'package:do_an2_1/Model/StatusTransport.dart';
-import 'package:do_an2_1/Model/VnpayModel.dart';
 import 'package:meta/meta.dart';
 
 part 'buy_order_detail_event.dart';
@@ -15,16 +15,9 @@ class BuyOrderDetailBloc
   ApiVnpay apiVnpay = ApiVnpay();
   ApiItem apiItem = ApiItem();
   BuyOrderDetailBloc() : super(BuyOrderDetailInitial()) {
-    on<EBuyOrderDetailGetVnpay>(getVnpay);
     on<EBuyOrderDetailUpdateReceived>(updateReceived);
-    on<EBuyOrderDetailReset>(reset);
-  }
-
-  FutureOr<void> getVnpay(
-      EBuyOrderDetailGetVnpay event, Emitter<BuyOrderDetailState> emit) async {
-    emit(SBuyOrderDetailLoading());
-    VnpayModel? vnpayModel = await apiVnpay.getVnpay(event.idBill);
-    emit(SBuyOrderDetaiVNpay(vnpayModel: vnpayModel!));
+    on<EBuyOrderDetailRated>(rated);
+    on<EBuyOrderDetailGetBillRefresh>(getBillRefresh);
   }
 
   FutureOr<void> updateReceived(EBuyOrderDetailUpdateReceived event,
@@ -37,8 +30,16 @@ class BuyOrderDetailBloc
         : null;
   }
 
-  FutureOr<void> reset(
-      EBuyOrderDetailReset event, Emitter<BuyOrderDetailState> emit) {
-    emit(SBuyOrderDetailReset());
+  FutureOr<void> rated(
+      EBuyOrderDetailRated event, Emitter<BuyOrderDetailState> emit) {
+    emit(SBuyOrderDetailRated());
+  }
+
+  FutureOr<void> getBillRefresh(EBuyOrderDetailGetBillRefresh event,
+      Emitter<BuyOrderDetailState> emit) async {
+    emit(SBuyOrderDetailBillLoading());
+    BillItemModel? bill = await apiItem.getBillRefresh(idBill: event.idBill);
+    Future.delayed(Duration(seconds: 1));
+    emit(SBuyOrderDetailBillRefreshSuccess(billItemModel: bill!));
   }
 }

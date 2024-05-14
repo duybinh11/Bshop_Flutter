@@ -38,8 +38,9 @@ dependencies:
   flutter_bloc: ^8.1.3
   flutter_rating_bar: ^4.0.1
   http: ^1.1.0
-  shared_preferences: ^2.2.2
+  shared_preferences: ^2.2.3
   vnpay_flutter: ^1.0.1
+
 
 dev_dependencies:
   flutter_lints: ^2.0.0
@@ -67,6 +68,10 @@ flutter:
     - assets/img/check.png
     - assets/img/sold.png
     - assets/img/avt.png
+    - assets/img/empty_box.png
+    - assets/Data/ProvinceData.json
+    - assets/img/warning.png
+    - assets/img/success.png
 
   #   - images/a_dot_ham.jpeg
   # An image asset can refer to one or more resolution-specific "variants", see

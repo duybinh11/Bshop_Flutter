@@ -14,11 +14,6 @@ class InforItemDetailOrderBill extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // double money = item.flashSaleModel == null
-    //     ? item.price * context.read<ItemDetailBloc>().count.toDouble()
-    //     : itemModel.cost *
-    //         context.read<ItemDetailBloc>().count *
-    //         (1 - itemDetailModel.flashSaleModel!.percent / 100).toDouble();
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -64,30 +59,30 @@ class InforItemDetailOrderBill extends StatelessWidget {
                 style: titles,
               )),
             ],
-            rows: [
+            rows: const [
               DataRow(cells: [
                 DataCell(
                   Text(
                     '100k',
-                    style: const TextStyle(fontSize: 17),
+                    style: TextStyle(fontSize: 17),
                   ),
                 ),
                 DataCell(
                   Text(
                     'percent',
-                    style: const TextStyle(fontSize: 17),
+                    style: TextStyle(fontSize: 17),
                   ),
                 ),
                 DataCell(
                   Text(
                     'sl',
-                    style: const TextStyle(fontSize: 17),
+                    style: TextStyle(fontSize: 17),
                   ),
                 ),
                 DataCell(
                   Text(
                     '100',
-                    style: const TextStyle(fontSize: 17),
+                    style: TextStyle(fontSize: 17),
                   ),
                 )
               ])

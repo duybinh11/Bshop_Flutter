@@ -7,7 +7,6 @@ class UserModel {
   String username;
   String phone;
   String address;
-  String token;
   String? img;
   UserModel(
       {required this.id,
@@ -15,8 +14,7 @@ class UserModel {
       required this.username,
       required this.phone,
       required this.address,
-      required this.img,
-      required this.token});
+      required this.img,});
 
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
@@ -25,7 +23,6 @@ class UserModel {
       'username': username,
       'phone': phone,
       'address': address,
-      'token': token,
     };
   }
 
@@ -37,7 +34,6 @@ class UserModel {
       username: map['username'] as String,
       phone: map['phone'] as String,
       address: map['address'] as String,
-      token: map['token'] as String,
     );
   }
 

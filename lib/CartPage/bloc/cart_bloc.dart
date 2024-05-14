@@ -22,7 +22,7 @@ class CartBloc extends Bloc<CartEvent, CartState> {
       ECartGetallCart event, Emitter<CartState> emit) async {
     listCartSelected.clear();
     emit(SCartLoading());
-    List<ItemCartModel> listCart = await apiItem.getAllCart(event.idUser);
+    List<ItemCartModel> listCart = await apiItem.getAllCart();
     listCart.isEmpty
         ? emit(SCartEmpty())
         : emit(SCartAllCart(listCart: listCart));
@@ -46,7 +46,7 @@ class CartBloc extends Bloc<CartEvent, CartState> {
     emit(SCartLoading());
     bool check = await apiItem.deleteCart(event.idCart);
     if (check) {
-      List<ItemCartModel> listCart = await apiItem.getAllCart(event.idUser);
+      List<ItemCartModel> listCart = await apiItem.getAllCart();
       if (listCart.isNotEmpty) {
         listCartSelected.clear();
         emit(SCartAllCart(listCart: listCart));

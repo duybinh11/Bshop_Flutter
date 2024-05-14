@@ -10,7 +10,7 @@ class ItemModel {
   String img;
   String descrip;
   int sold;
-  double rateStar;
+  double? rateStar;
   FlashSaleModel? flashSaleModel;
   ItemModel({
     required this.id,
@@ -31,28 +31,13 @@ class ItemModel {
       'img': img,
       'descrip': descrip,
       'sold': sold,
-      'rate_star': rateStar,
+      'rate_avg': rateStar,
       'flash_sale': flashSaleModel?.toMap(),
     };
   }
 
   factory ItemModel.fromMap(Map<String, dynamic> mapData) {
-    Map mapItem = mapData['item'];
     Map? mapFlashSale = mapData['flash_sale'];
-    return ItemModel(
-      id: mapItem['id'] as int,
-      name: mapItem['name'] as String,
-      price: mapItem['price'] as int,
-      img: mapItem['img'] as String,
-      descrip: mapItem['descrip'] as String,
-      sold: mapItem['sold'] as int,
-      rateStar: double.parse(mapItem['rate_star'].toString()),
-      flashSaleModel: mapFlashSale != null
-          ? FlashSaleModel.fromMap(mapFlashSale as Map<String, dynamic>)
-          : null,
-    );
-  }
-  factory ItemModel.fromMapItemCart(Map<String, dynamic> mapData) {
     return ItemModel(
       id: mapData['id'] as int,
       name: mapData['name'] as String,
@@ -60,13 +45,15 @@ class ItemModel {
       img: mapData['img'] as String,
       descrip: mapData['descrip'] as String,
       sold: mapData['sold'] as int,
-      rateStar: double.parse(mapData['rate_star'].toString()),
-      flashSaleModel: mapData['flash_sale'] != null
-          ? FlashSaleModel.fromMap(
-              mapData['flash_sale'] as Map<String, dynamic>)
+      rateStar: mapData['rate_avg'] != null
+          ? double.parse(mapData['rate_avg'].toString())
+          : null,
+      flashSaleModel: mapFlashSale != null
+          ? FlashSaleModel.fromMap(mapFlashSale as Map<String, dynamic>)
           : null,
     );
   }
+
   factory ItemModel.fromMapOrder(Map<String, dynamic> mapData) {
     return ItemModel(
         id: mapData['id'] as int,

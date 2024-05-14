@@ -26,9 +26,15 @@ class _UserCustomState extends State<UserCustom> {
     );
   }
 
+  UserModel? userModel;
+  @override
+  void initState() {
+    userModel = context.read<LoginBloc>().userModel;
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
-    UserModel userModel = context.read<LoginBloc>().userModel!;
     return Padding(
       padding: const EdgeInsets.all(5),
       child: Container(
@@ -49,7 +55,7 @@ class _UserCustomState extends State<UserCustom> {
                 ),
               ],
             ),
-            Text('${userModel.username} | ${userModel.phone}'),
+            Text('${userModel?.username} | ${userModel?.phone}'),
             BlocBuilder<OrderDetailBloc, OrderDetailState>(
               buildWhen: (previous, current) {
                 if (current is SOrderDetailSetAddress) {

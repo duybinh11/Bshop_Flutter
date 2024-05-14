@@ -5,15 +5,6 @@ part of 'buy_order_detail_bloc.dart';
 sealed class BuyOrderDetailEvent {}
 
 // ignore: must_be_immutable
-class EBuyOrderDetailGetVnpay extends BuyOrderDetailEvent {
-  int idBill;
-  EBuyOrderDetailGetVnpay({
-    required this.idBill,
-  });
-}
-
-// ignore: must_be_immutable
-class EBuyOrderDetailReset extends BuyOrderDetailEvent {}
 
 // ignore: must_be_immutable
 class EBuyOrderDetailUpdateReceived extends BuyOrderDetailEvent {
@@ -21,4 +12,12 @@ class EBuyOrderDetailUpdateReceived extends BuyOrderDetailEvent {
   EBuyOrderDetailUpdateReceived({
     required this.idOrder,
   });
+}
+
+class EBuyOrderDetailRated extends BuyOrderDetailEvent {}
+
+// ignore: must_be_immutable
+class EBuyOrderDetailGetBillRefresh extends BuyOrderDetailEvent {
+  int idBill;
+  EBuyOrderDetailGetBillRefresh({required this.idBill});
 }

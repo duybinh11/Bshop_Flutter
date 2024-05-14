@@ -13,7 +13,7 @@ class ItemOrderCustom extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    ItemModel itemModel = billItemModel.listOrder.first.item;
+    ItemModel itemModel = billItemModel.listOrder.first;
     return GestureDetector(
       onTap: () => Navigator.pushNamed(context, BuyOrderDetailPage.routeName,
           arguments: {'billItemModel': billItemModel}),

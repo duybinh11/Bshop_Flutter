@@ -1,10 +1,7 @@
 import 'dart:async';
-
 import 'package:bloc/bloc.dart';
 import 'package:do_an2_1/Api/ApiAuth.dart';
 import 'package:do_an2_1/Model/UserModel.dart';
-import 'package:meta/meta.dart';
-
 part 'login_event.dart';
 part 'login_state.dart';
 
@@ -22,8 +19,8 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
     if (result is UserModel) {
       userModel = result;
       emit(SLoginSuccess());
-    } else if (result is bool) {
-      emit(SLoginFail());
+    } else if (result is String) {
+      emit(SLoginFail(message: result));
     }
   }
 }

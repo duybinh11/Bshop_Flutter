@@ -54,7 +54,7 @@ class ItemDetailBloc extends Bloc<ItemDetailEvent, ItemDetailState> {
   FutureOr<void> addCart(
       EItemDetailAddCart event, Emitter<ItemDetailState> emit) async {
     emit(SItemDetailAddCartLoading());
-    bool result = await apiItem.addCart(event.idItem, event.idUser, count);
+    bool result = await apiItem.addCart(event.idItem, count);
     result ? emit(SItemDetailAddSucces()) : emit(SItemDetailAddCartErorr());
   }
 

@@ -20,15 +20,18 @@ class ItemDetailPage extends StatefulWidget {
 class _ItemDetailPageState extends State<ItemDetailPage> {
   late int id;
   late ItemDetailBloc itemDetailBloc;
+  bool isLoad = false;
 
   @override
   void didChangeDependencies() {
-    Map<String, dynamic> map =
-        ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>;
-    id = map['id_item'] as int;
-    itemDetailBloc = context.read<ItemDetailBloc>();
-    itemDetailBloc.add(EItemDetailGetData(id: id));
-    print('sddddd');
+    if (!isLoad) {
+      Map<String, dynamic> map =
+          ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>;
+      id = map['id_item'] as int;
+      itemDetailBloc = context.read<ItemDetailBloc>();
+      itemDetailBloc.add(EItemDetailGetData(id: id));
+      isLoad = true;
+    }
     super.didChangeDependencies();
   }
 

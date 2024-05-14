@@ -2,7 +2,6 @@ import 'package:do_an2_1/Model/AddressHistory.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../Login/bloc/login_bloc.dart';
 import '../bloc/order_detail_bloc.dart';
 
 class GetAddressHistory extends StatefulWidget {
@@ -15,11 +14,9 @@ class GetAddressHistory extends StatefulWidget {
 }
 
 class _GetAddressHistoryState extends State<GetAddressHistory> {
-  int i = 0;
   @override
   void initState() {
-    int idUser = context.read<LoginBloc>().userModel!.id;
-    context.read<OrderDetailBloc>().add(EOrderDetailGetAddress(idUser: idUser));
+    context.read<OrderDetailBloc>().add(EOrderDetailGetAddress());
     super.initState();
   }
 

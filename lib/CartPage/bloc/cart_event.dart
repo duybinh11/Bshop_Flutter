@@ -3,12 +3,7 @@ part of 'cart_bloc.dart';
 
 abstract class CartEvent {}
 
-class ECartGetallCart extends CartEvent {
-  int idUser;
-  ECartGetallCart({
-    required this.idUser,
-  });
-}
+class ECartGetallCart extends CartEvent {}
 
 class ECartChangeSl extends CartEvent {
   ItemCartModel itemCartModel;

@@ -32,7 +32,7 @@ class ItemOrderStateCustom extends StatelessWidget {
                 width: 100,
                 height: double.infinity,
                 child: CachedNetworkImage(
-                  imageUrl: itemOrder.item.img,
+                  imageUrl: itemOrder.img,
                   errorWidget: (context, url, error) => const Icon(Icons.error),
                   placeholder: (context, url) =>
                       const CircularProgressIndicator(),
@@ -48,7 +48,7 @@ class ItemOrderStateCustom extends StatelessWidget {
                 children: [
                   Expanded(
                     child: Text(
-                      itemOrder.item.name,
+                      itemOrder.name,
                       maxLines: 2,
                       overflow: TextOverflow.ellipsis,
                       style: const TextStyle(

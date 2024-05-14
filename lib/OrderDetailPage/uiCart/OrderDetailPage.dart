@@ -24,6 +24,7 @@ class OrderDetailPage extends StatefulWidget {
 class _OrderDetailPageState extends State<OrderDetailPage> {
   late List<ItemCartModel> listSelected;
   late OrderDetailBloc orderDetailBloc;
+  bool isLoad = false;
   @override
   void dispose() {
     orderDetailBloc.clearBloc();
@@ -31,15 +32,22 @@ class _OrderDetailPageState extends State<OrderDetailPage> {
   }
 
   @override
+  void initState() {
+    super.initState();
+  }
+
+  @override
   void didChangeDependencies() {
-    Map<String, dynamic> map =
-        ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>;
-    int idUser = context.read<LoginBloc>().userModel!.id;
-    listSelected = map['list_selected'] as List<ItemCartModel>;
-    orderDetailBloc = context.read<OrderDetailBloc>();
-    orderDetailBloc.add(EOrderDetailGetAddressDefault(idUser: idUser));
-    orderDetailBloc.add(EOrderDetailSetListCart(listSelected: listSelected));
-    super.didChangeDependencies();
+    if (!isLoad) {
+      Map<String, dynamic> map =
+          ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>;
+      listSelected = map['list_selected'] as List<ItemCartModel>;
+      orderDetailBloc = context.read<OrderDetailBloc>();
+      orderDetailBloc.add(EOrderDetailGetAddressDefault());
+      orderDetailBloc.add(EOrderDetailSetListCart(listSelected: listSelected));
+      isLoad = true;
+      super.didChangeDependencies();
+    }
   }
 
   @override
@@ -54,8 +62,6 @@ class _OrderDetailPageState extends State<OrderDetailPage> {
       body: BlocConsumer<OrderDetailBloc, OrderDetailState>(
         listener: (context, state) {
           if (state is SCartOrderBuySuccess) {
-            int idUser = context.read<LoginBloc>().userModel!.id;
-            context.read<CartBloc>().add(ECartGetallCart(idUser: idUser));
             Navigator.pop(context);
             showDialog(
               context: context,

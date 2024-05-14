@@ -26,10 +26,8 @@ class _VnPayPageState extends State<VnPayPage> {
   }
 
   void buyItem(BuildContext context) {
-    int idUser = context.read<LoginBloc>().userModel!.id;
     final orderDetailBloc = context.read<OrderDetailBloc>();
-    bloc.add(EVnPayAddVnpayBuyItem(
-        idUser: idUser, orderDetailBloc: orderDetailBloc));
+    bloc.add(EVnPayAddVnpayBuyItem(orderDetailBloc: orderDetailBloc));
   }
 
   void addVnpay(Map<String, dynamic> map, int isPayment) {
@@ -60,48 +58,88 @@ class _VnPayPageState extends State<VnPayPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('vnpay')),
-      body: BlocBuilder<VnPayBloc, VnPayState>(
-        bloc: bloc,
-        builder: (context, state) {
-          if (state is SVnPayLoading) {
-            return const Center(child: CircularProgressIndicator());
-          }
-          if (state is SVnPayGetUrlErorr) {
-            return const Text('loi SVnPayGetUrlErorr');
-          }
-          if (state is SVnPayPaymentSuccess) {
-            return const Text('Thanh toan thanh cong');
-          }
-          if (state is SVnPayPaymentNotPay) {
-            return const Text('ban chua thanh toan');
-          }
-          if (state is SVnPayPaymentErorr) {
-            return const Text('loi SVnPayPaymentErorr');
-          }
-          if (state is SVnpayGetUrlSuccesss) {
-            VNPAYFlutter.instance.show(
-              paymentUrl: state.url,
-              onPaymentSuccess: (map) {
-                addVnpay(map, 1);
-              },
-              onPaymentError: (map) {
-                addVnpay(map, 0);
-              },
-            );
-          }
-          return Center(
-            child: ElevatedButton(
-                onPressed: () {
-                  buyItem(context);
-                  postMoney(context);
+      body: Center(
+        child: BlocBuilder<VnPayBloc, VnPayState>(
+          bloc: bloc,
+          builder: (context, state) {
+            if (state is SVnPayLoading) {
+              return const Center(child: CircularProgressIndicator());
+            }
+            if (state is SVnPayGetUrlErorr) {
+              return const Text('loi SVnPayGetUrlErorr');
+            }
+            if (state is SVnPayPaymentSuccess) {
+              return Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Image.asset("assets/img/success.png"),
+                  const SizedBox(
+                    height: 10,
+                  ),
+                  const Text("Thanh Toán Thánh Công"),
+                  const SizedBox(
+                    height: 10,
+                  ),
+                  ElevatedButton(
+                      onPressed: () {
+                        Navigator.of(context)
+                            .popUntil((route) => route.isFirst);
+                      },
+                      child: const Text(
+                        "Quay Lại",
+                        style: TextStyle(color: Colors.white),
+                      ))
+                ],
+              );
+            }
+            if (state is SVnPayPaymentNotPay) {
+              return Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Image.asset("assets/img/warning.png"),
+                  const SizedBox(
+                    height: 10,
+                  ),
+                  const Text("Bạn chưa thanh toán"),
+                  ElevatedButton(
+                      onPressed: () {
+                        Navigator.of(context)
+                            .popUntil((route) => route.isFirst);
+                      },
+                      child: const Text(
+                        "Quay Lại",
+                        style: TextStyle(color: Colors.white),
+                      ))
+                ],
+              );
+            }
+            if (state is SVnPayPaymentErorr) {
+              return const Text('loi SVnPayPaymentErorr');
+            }
+            if (state is SVnpayGetUrlSuccesss) {
+              VNPAYFlutter.instance.show(
+                paymentUrl: state.url,
+                onPaymentSuccess: (map) {
+                  addVnpay(map, 1);
                 },
-                child: const Text(
-                  'Thanh Toán',
-                  style: TextStyle(color: Colors.white),
-                )),
-          );
-        },
+                onPaymentError: (map) {
+                  addVnpay(map, 0);
+                },
+              );
+            }
+            return Center(
+              child: ElevatedButton(
+                  onPressed: () {
+                    buyItem(context);
+                    postMoney(context);
+                  },
+                  child: const Text(
+                    'Thanh Toán',
+                    style: TextStyle(color: Colors.white),
+                  )),
+            );
+          },
+        ),
       ),
     );
   }

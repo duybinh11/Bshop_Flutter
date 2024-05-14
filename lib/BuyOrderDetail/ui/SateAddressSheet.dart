@@ -21,6 +21,9 @@ class SateAddressSheet extends StatelessWidget {
         if (state is SBuyOrderDetaiReceivedSuccess) {
           itemOrder.listStatusTransport.add(state.statusAddress);
         }
+        if (state is SBuyOrderDetailRated) {
+          itemOrder.isRate = true;
+        }
       },
       builder: (context, state) {
         return Container(
@@ -75,7 +78,7 @@ class BottomStateAddress extends StatelessWidget {
   void clickReceiveOrder(BuildContext context) {
     context
         .read<BuyOrderDetailBloc>()
-        .add(EBuyOrderDetailUpdateReceived(idOrder: itemOrder.id));
+        .add(EBuyOrderDetailUpdateReceived(idOrder: itemOrder.idOrder));
   }
 
   @override

@@ -17,13 +17,13 @@ class _FiterItemState extends State<FiterItem> {
   int i = 0;
 
   List<CategoryModel> listCategory = [
-    CategoryModel(id: 0, name: 'All'),
-    CategoryModel(id: 6, name: 'New'),
-    CategoryModel(id: 1, name: 'Fashion'),
-    // CategoryModel(id: 2, name: 'Food'),
-    CategoryModel(id: 3, name: 'Sport'),
+    CategoryModel(id: 0, name: 'Tất cả'),
+    CategoryModel(id: 6, name: 'Mới nhất'),
+    CategoryModel(id: 1, name: 'Thời trang'),
+    CategoryModel(id: 2, name: 'Đồ ăn'),
+    CategoryModel(id: 3, name: 'Thể thao'),
     CategoryModel(id: 4, name: 'SkinCare'),
-    CategoryModel(id: 5, name: 'Book'),
+    CategoryModel(id: 5, name: 'Sách'),
   ];
   List<String> priceSorts = [
     'Thấp đến cao',

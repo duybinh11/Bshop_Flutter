@@ -39,12 +39,11 @@ class ItemCartModel extends ItemModel {
   }
 
   factory ItemCartModel.fromMap(Map<String, dynamic> map) {
-    ItemModel itemModel = ItemModel.fromMapItemCart(map['item']);
-    Map<String, dynamic> mapCart = map['cart'];
+    ItemModel itemModel = ItemModel.fromMap(map['item']);
     return ItemCartModel(
-        idCart: mapCart['id'],
-        amount: mapCart['amount'] as int,
-        createdAt: DateTime.parse(mapCart['created_at']),
+        idCart: map['id'],
+        amount: map['amount'] as int,
+        createdAt: DateTime.parse(map['created_at']),
         id: itemModel.id,
         descrip: itemModel.descrip,
         img: itemModel.img,

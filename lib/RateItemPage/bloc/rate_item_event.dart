@@ -5,13 +5,11 @@ abstract class RateItemEvent {}
 
 class ERateItemAdd extends RateItemEvent {
   int idOrder;
-  int idUser;
   double rateNum;
   String comment;
   int idItem;
   ERateItemAdd({
     required this.idOrder,
-    required this.idUser,
     required this.idItem,
     required this.rateNum,
     required this.comment,

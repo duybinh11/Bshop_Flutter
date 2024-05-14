@@ -35,7 +35,6 @@ class VnPayBloc extends Bloc<VnPayEvent, VnPayState> {
     OrderDetailBloc orderDetailBloc = event.orderDetailBloc;
     Map<String, dynamic> mapData = await apiItem.addBill(
         listCart: orderDetailBloc.listSelected!,
-        idUser: event.idUser,
         idAdress: orderDetailBloc.addressDefault1!.id,
         money: orderDetailBloc.totalMoney,
         isVnpay: 1);

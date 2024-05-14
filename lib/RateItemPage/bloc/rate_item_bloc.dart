@@ -2,7 +2,6 @@ import 'dart:async';
 
 import 'package:bloc/bloc.dart';
 import 'package:do_an2_1/Api/ApiItem.dart';
-import 'package:do_an2_1/Model/ItemOrderModel.dart';
 import 'package:meta/meta.dart';
 
 part 'rate_item_event.dart';
@@ -21,7 +20,6 @@ class RateItemBloc extends Bloc<RateItemEvent, RateItemState> {
         idItem: event.idItem,
         comment: event.comment,
         idOrder: event.idOrder,
-        idUser: event.idUser,
         rate: event.rateNum);
     check ? emit(SRateItemSuccess()) : emit(SRateItemErorr());
   }

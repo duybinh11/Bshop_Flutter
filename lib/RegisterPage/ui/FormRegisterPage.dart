@@ -94,6 +94,7 @@ class _FormRegisterPageState extends State<FormRegisterPage> {
                 controller: usernamelCtl,
                 decoration: const InputDecoration(labelText: 'Username'),
                 validator: inputlValidate,
+              
               ),
               const SizedBox(
                 height: 10,
@@ -111,7 +112,6 @@ class _FormRegisterPageState extends State<FormRegisterPage> {
                 controller: addressCtl,
                 decoration: const InputDecoration(labelText: 'Address'),
                 keyboardType: TextInputType.phone,
-                validator: inputlValidate,
               ),
               const SizedBox(
                 height: 10,
@@ -120,6 +120,7 @@ class _FormRegisterPageState extends State<FormRegisterPage> {
                 controller: pass1Ctl,
                 decoration: const InputDecoration(labelText: 'Password'),
                 validator: inputlValidate,
+                obscureText : true
               ),
               const SizedBox(
                 height: 10,
@@ -129,6 +130,7 @@ class _FormRegisterPageState extends State<FormRegisterPage> {
                 decoration:
                     const InputDecoration(labelText: 'Confirm Password'),
                 validator: confirmPass,
+                obscureText : true
               ),
               const SizedBox(
                 height: 15,

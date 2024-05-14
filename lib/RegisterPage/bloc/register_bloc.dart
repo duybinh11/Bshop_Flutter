@@ -19,7 +19,7 @@ class RegisterBloc extends Bloc<RegisterEvent, RegisterState> {
     dynamic result = await apiAuth.RegisterAccount(
         event.email, event.pass, event.phone, event.address, event.username);
     if (result is bool) {
-      result ? emit(SRegisterSuccess()) : emit(SRegisterErorr(erorr: 'sd'));
+      result ? emit(SRegisterSuccess()) : emit(SRegisterErorr(erorr: 'Loi'));
     } else if (result is String) {
       emit(SRegisterErorr(erorr: result));
     }

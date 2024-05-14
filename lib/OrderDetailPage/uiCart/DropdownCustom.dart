@@ -19,6 +19,9 @@ class _DropdownCustomProvinceState extends State<DropdownCustomProvince> {
   @override
   void initState() {
     province = widget.lists.first;
+    context
+        .read<OrderDetailBloc>()
+        .add(EOrderDetailSetProvien(province: province));
     super.initState();
   }
 
@@ -64,32 +67,37 @@ class _DropdownCustomDistrictState extends State<DropdownCustomDistrict> {
   @override
   void initState() {
     district = widget.lists.first;
+    context
+        .read<OrderDetailBloc>()
+        .add(EOrderDetailSetDistrict(districts: district));
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
     return Container(
-        padding: const EdgeInsets.symmetric(vertical: 2, horizontal: 7),
-        decoration: BoxDecoration(border: Border.all(width: 1)),
-        width: double.infinity,
-        child: DropdownButton<Districts>(
-          value: district,
-          items: widget.lists.map((item) {
-            return DropdownMenuItem(
-              value: item,
-              child: Text(item.name),
-            );
-          }).toList(),
-          onChanged: (newValue) {
-            setState(() {
-              district = newValue!;
-              context
-                  .read<OrderDetailBloc>()
-                  .add(EOrderDetailSetDistrict(districts: newValue));
-            });
-          },
-        ));
+      padding: const EdgeInsets.symmetric(vertical: 2, horizontal: 7),
+      decoration: BoxDecoration(border: Border.all(width: 1)),
+      width: double.infinity,
+      child: DropdownButton<Districts>(
+        isExpanded: true,
+        value: widget.lists.first,
+        items: widget.lists
+            .map((e) => DropdownMenuItem<Districts>(
+                  value: e,
+                  child: Text(e.name),
+                ))
+            .toList(),
+        onChanged: (value) {
+          setState(() {
+            district = value!;
+            context
+                .read<OrderDetailBloc>()
+                .add(EOrderDetailSetDistrict(districts: district));
+          });
+        },
+      ),
+    );
   }
 }
 
@@ -107,6 +115,7 @@ class _DropdownCustomWardsState extends State<DropdownCustomDWards> {
   @override
   void initState() {
     wards = widget.lists.first;
+    context.read<OrderDetailBloc>().add(EOrderDetailSetWard(ward: wards));
     super.initState();
   }
 
@@ -118,7 +127,7 @@ class _DropdownCustomWardsState extends State<DropdownCustomDWards> {
       width: double.infinity,
       child: DropdownButton<Wards>(
         isExpanded: true,
-        value: wards,
+        value: widget.lists.first,
         items: widget.lists
             .map((e) => DropdownMenuItem<Wards>(
                   value: e,
@@ -130,7 +139,7 @@ class _DropdownCustomWardsState extends State<DropdownCustomDWards> {
             wards = value!;
             context
                 .read<OrderDetailBloc>()
-                .add(EOrderDetailSetWard(ward: value));
+                .add(EOrderDetailSetWard(ward: wards));
           });
         },
       ),

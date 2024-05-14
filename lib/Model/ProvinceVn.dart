@@ -2,105 +2,94 @@ import 'dart:convert';
 
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 class ProvinceVn {
+  String id;
   String name;
-  int code;
-  String codename;
-  String divisionType;
-  int phoneCode;
-  List<Districts> districts;
   ProvinceVn({
+    required this.id,
     required this.name,
-    required this.code,
-    required this.codename,
-    required this.divisionType,
-    required this.phoneCode,
-    required this.districts,
   });
 
-  factory ProvinceVn.fromMap(Map<String, dynamic> map) {
+  ProvinceVn copyWith({
+    String? id,
+    String? name,
+  }) {
     return ProvinceVn(
-      name: map['name'] as String,
-      code: map['code'] as int,
-      codename: map['codename'] as String,
-      divisionType: map['division_type'] as String,
-      phoneCode: map['phone_code'] as int,
-      districts: List<Districts>.from(
-        (map['districts'] as List<dynamic>).map<Districts>(
-          (x) => Districts.fromMap(x as Map<String, dynamic>),
-        ),
-      ),
+      id: id ?? this.id,
+      name: name ?? this.name,
     );
   }
 
-  @override
-  String toString() {
-    return 'ProvinceVn(name: $name, code: $code, codename: $codename, divisionType: $divisionType, phoneCode: $phoneCode, )';
+  Map<String, dynamic> toMap() {
+    return <String, dynamic>{
+      'idProvince': id,
+      'name': name,
+    };
   }
+
+  factory ProvinceVn.fromMap(Map<String, dynamic> map) {
+    return ProvinceVn(
+      id: map['idProvince'] as String,
+      name: map['name'] as String,
+    );
+  }
+
+  String toJson() => json.encode(toMap());
+
+  factory ProvinceVn.fromJson(String source) =>
+      ProvinceVn.fromMap(json.decode(source) as Map<String, dynamic>);
+
+  @override
+  String toString() => 'ProvinceVn(id: $id, name: $name)';
 }
 
 class Districts {
+  String idProvince;
+  String idDistrict;
   String name;
-  int code;
-  String codename;
-  String divisionType;
-  String shortCodename;
-  List<Wards> wards;
   Districts({
+    required this.idProvince,
+    required this.idDistrict,
     required this.name,
-    required this.code,
-    required this.codename,
-    required this.divisionType,
-    required this.shortCodename,
-    required this.wards,
   });
 
   factory Districts.fromMap(Map<String, dynamic> map) {
     return Districts(
+      idProvince: map['idProvince'] as String,
+      idDistrict: map['idDistrict'] as String,
       name: map['name'] as String,
-      code: map['code'] as int,
-      codename: map['codename'] as String,
-      divisionType: map['division_type'] as String,
-      shortCodename: map['short_codename'] as String,
-      wards: List<Wards>.from(
-        (map['wards'] as List<dynamic>).map<Wards?>(
-          (x) => Wards.fromMap(x as Map<String, dynamic>),
-        ),
-      ),
     );
   }
 
+  factory Districts.fromJson(String source) =>
+      Districts.fromMap(json.decode(source) as Map<String, dynamic>);
+
   @override
-  String toString() {
-    return 'Districts(name: $name, code: $code, codename: $codename, divisionType: $divisionType, shortCodename: $shortCodename)';
-  }
+  String toString() =>
+      'Districts(idProvince: $idProvince, idDistrict: $idDistrict, name: $name)';
 }
 
 class Wards {
+  String idDistrict;
+  String idCommune;
   String name;
-  int code;
-  String codename;
-  String divisionType;
-  String shortCodename;
   Wards({
+    required this.idDistrict,
+    required this.idCommune,
     required this.name,
-    required this.code,
-    required this.codename,
-    required this.divisionType,
-    required this.shortCodename,
   });
 
+ 
   factory Wards.fromMap(Map<String, dynamic> map) {
     return Wards(
+      idDistrict: map['idDistrict'] as String,
+      idCommune: map['idCommune'] as String,
       name: map['name'] as String,
-      code: map['code'] as int,
-      codename: map['codename'] as String,
-      divisionType: map['division_type'] as String,
-      shortCodename: map['short_codename'] as String,
     );
   }
 
+  
   @override
-  String toString() {
-    return 'Wards(name: $name, code: $code, codename: $codename, divisionType: $divisionType, shortCodename: $shortCodename)';
-  }
+  String toString() => 'Wards(idDistrict: $idDistrict, idCommune: $idCommune, name: $name)';
+
+ 
 }

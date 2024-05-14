@@ -1,4 +1,3 @@
-import 'package:do_an2_1/Login/bloc/login_bloc.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -30,11 +29,8 @@ class _SelectProvinceState extends State<SelectProvince> {
   }
 
   void clickSaveAddress(BuildContext context) {
-    int idUser = context.read<LoginBloc>().userModel!.id;
     context.read<OrderDetailBloc>().add(EOrderDetailAddAddress(
-        placeDetail: placeDetailCtl.text,
-        idUser: idUser,
-        isDefault: isDefault));
+        placeDetail: placeDetailCtl.text, isDefault: isDefault));
   }
 
   bool isDefault = false;

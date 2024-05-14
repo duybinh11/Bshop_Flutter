@@ -26,8 +26,7 @@ class EItemDetailRate extends ItemDetailEvent {
 
 class EItemDetailAddCart extends ItemDetailEvent {
   int idItem;
-  int idUser;
-  EItemDetailAddCart({required this.idItem, required this.idUser});
+  EItemDetailAddCart({required this.idItem});
 }
 
 class EItemDetailGetAddressDefault extends ItemDetailEvent {

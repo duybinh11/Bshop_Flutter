@@ -37,7 +37,7 @@ class ApiVnpay {
   }
 
   Future<VnpayModel?> getVnpay(int idBill) async {
-    Uri uri = Uri.parse('http://10.0.2.2:8000/api/vnpay/get_vnpay/1');
+    Uri uri = Uri.parse('http://10.0.2.2:8000/api/vnpay/get_vnpay/$idBill');
     http.Response response = await http.get(uri);
     if (response.statusCode == 200) {
       Map<String, dynamic> mapData = jsonDecode(response.body);

@@ -17,7 +17,7 @@ class _FormLoginState extends State<FormLogin> {
 
   final passCtl = TextEditingController();
 
-  bool isVisible = false;
+  bool isVisible = true;
 
   @override
   void dispose() {
@@ -79,7 +79,7 @@ class _FormLoginState extends State<FormLogin> {
                   decoration: InputDecoration(
                       suffixIcon: GestureDetector(
                         child: Icon(
-                          isVisible ? Icons.visibility : Icons.visibility_off,
+                          isVisible ? Icons.visibility_off : Icons.visibility,
                           color: Colors.blue,
                         ),
                         onTap: () => setState(() => isVisible = !isVisible),

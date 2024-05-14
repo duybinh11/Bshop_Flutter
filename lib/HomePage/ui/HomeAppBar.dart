@@ -10,7 +10,7 @@ class HomeAppBar extends StatelessWidget {
     return SliverAppBar(
       pinned: true,
       title: const Text(
-        'BFood',
+        'BShop',
         style: TextStyle(
             fontFamily: 'popins1',
             color: Colors.blue,

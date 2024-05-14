@@ -8,15 +8,15 @@ final class BuyOrderDetailInitial extends BuyOrderDetailState {}
 
 final class SBuyOrderDetailLoading extends BuyOrderDetailState {}
 
-final class SBuyOrderDetailReset extends BuyOrderDetailState {}
+final class SBuyOrderDetailBillLoading extends BuyOrderDetailState {}
 
 // ignore: must_be_immutable
-class SBuyOrderDetaiVNpay extends BuyOrderDetailState {
-  VnpayModel vnpayModel;
-  SBuyOrderDetaiVNpay({
-    required this.vnpayModel,
-  });
+final class SBuyOrderDetailBillRefreshSuccess extends BuyOrderDetailState {
+  BillItemModel billItemModel;
+  SBuyOrderDetailBillRefreshSuccess({required this.billItemModel});
 }
+
+final class SBuyOrderDetailRated extends BuyOrderDetailState {}
 
 // ignore: must_be_immutable
 class SBuyOrderDetaiReceivedSuccess extends BuyOrderDetailState {

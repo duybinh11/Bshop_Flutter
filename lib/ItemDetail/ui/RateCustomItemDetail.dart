@@ -37,7 +37,7 @@ class _RateCustomState extends State<RateCustom> {
                 return const Center(child: CircularProgressIndicator());
               }
               if (state is SItemDetailRateEmpty) {
-                return const Center(child: Text('rate empty'));
+                return const Center(child: Text('Chưa có đánh giá nào!'));
               }
               if (state is SItemDetailGetRate) {
                 final listRate = state.listRate;

@@ -18,8 +18,8 @@ class LoginPage extends StatelessWidget {
           if (state is SLoginFail) {
             showDialog(
               context: context,
-              builder: (context) =>
-                  showdialogCustom(context, 'Thông Báo', 'Đăng nhập thất bại'),
+              builder: (context) => showdialogCustom(context, 'Thông Báo',
+                  'Đăng nhập thất  dfsbại ${state.message}'),
             );
           }
           if (state is SLoginSuccess) {

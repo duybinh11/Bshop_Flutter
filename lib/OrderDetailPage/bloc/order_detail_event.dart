@@ -17,12 +17,7 @@ class EOrderDetailSetMoney extends OrderDetailEvent {
   });
 }
 
-class EOrderDetailGetAddressDefault extends OrderDetailEvent {
-  int idUser;
-  EOrderDetailGetAddressDefault({
-    required this.idUser,
-  });
-}
+class EOrderDetailGetAddressDefault extends OrderDetailEvent {}
 
 class EOrderDetailGetProvien extends OrderDetailEvent {}
 
@@ -44,19 +39,12 @@ class EOrderDetailSetWard extends OrderDetailEvent {
 }
 
 class EOrderDetailAddAddress extends OrderDetailEvent {
-  int idUser;
   bool isDefault;
   String placeDetail;
-  EOrderDetailAddAddress(
-      {required this.idUser,
-      required this.isDefault,
-      required this.placeDetail});
+  EOrderDetailAddAddress({required this.isDefault, required this.placeDetail});
 }
 
-class EOrderDetailGetAddress extends OrderDetailEvent {
-  int idUser;
-  EOrderDetailGetAddress({required this.idUser});
-}
+class EOrderDetailGetAddress extends OrderDetailEvent {}
 
 class EOrderDetailSetAddressDefault extends OrderDetailEvent {
   AddressHistory addressDefault;
@@ -72,9 +60,4 @@ class EOrderDetailSetListCart extends OrderDetailEvent {
   });
 }
 
-class EOrderDetailBuyItem extends OrderDetailEvent {
-  int idUser;
-  EOrderDetailBuyItem({
-    required this.idUser,
-  });
-}
+class EOrderDetailBuyItem extends OrderDetailEvent {}

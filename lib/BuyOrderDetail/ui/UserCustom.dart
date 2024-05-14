@@ -1,5 +1,4 @@
 import 'package:do_an2_1/Model/AddressHistory.dart';
-import 'package:do_an2_1/OrderDetailPage/bloc/order_detail_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -18,7 +17,7 @@ class UserCustom extends StatefulWidget {
 class _UserCustomState extends State<UserCustom> {
   @override
   Widget build(BuildContext context) {
-    UserModel userModel = context.read<LoginBloc>().userModel!;
+    UserModel? userModel = context.read<LoginBloc>().userModel;
     return Padding(
       padding: const EdgeInsets.all(5),
       child: Container(
@@ -39,7 +38,7 @@ class _UserCustomState extends State<UserCustom> {
                 ),
               ],
             ),
-            Text('${userModel.username} | ${userModel.phone}'),
+            Text('${userModel?.username} | ${userModel?.phone}'),
             Text(
               widget.address.toString(),
               maxLines: 2,

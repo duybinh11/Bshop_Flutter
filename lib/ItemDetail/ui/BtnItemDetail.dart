@@ -19,17 +19,13 @@ class BtnItemDetail extends StatelessWidget {
 
   ItemModel item;
   void addCart(BuildContext context) {
-    int idUser = context.read<LoginBloc>().userModel!.id;
-    context
-        .read<ItemDetailBloc>()
-        .add(EItemDetailAddCart(idUser: idUser, idItem: item.id));
+    context.read<ItemDetailBloc>().add(EItemDetailAddCart(idItem: item.id));
 
     initCartPage(context);
   }
 
   void initCartPage(BuildContext context) {
-    int idUser = context.read<LoginBloc>().userModel!.id;
-    context.read<CartBloc>().add(ECartGetallCart(idUser: idUser));
+    context.read<CartBloc>().add(ECartGetallCart());
   }
 
   void clickBuy(BuildContext context) {

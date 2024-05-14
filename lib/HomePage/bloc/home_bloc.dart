@@ -1,8 +1,10 @@
 import 'dart:async';
 
 import 'package:bloc/bloc.dart';
+import 'package:do_an2_1/Api/ApiAuth.dart';
 import 'package:do_an2_1/Api/ApiItem.dart';
 import 'package:do_an2_1/Model/ItemModel.dart';
+import 'package:do_an2_1/Model/UserModel.dart';
 import 'package:meta/meta.dart';
 
 part 'home_event.dart';
@@ -10,6 +12,7 @@ part 'home_state.dart';
 
 class HomeBloc extends Bloc<HomeEvent, HomeState> {
   ApiItem apiItem = ApiItem();
+  ApiAuth apiAuth = ApiAuth();
   List<ItemModel> listItem = [];
   int isASC = 1;
   int idCategory = 0;
@@ -114,4 +117,5 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
     searching = false;
     nameSearch = '';
   }
+
 }

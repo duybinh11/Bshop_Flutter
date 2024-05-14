@@ -35,6 +35,10 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
   @override
+  void initState() {
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return MultiBlocProvider(
@@ -77,7 +81,7 @@ class _MyAppState extends State<MyApp> {
           VnPayPage.routeName: (context) => const VnPayPage(),
           OrderDetailPage.routeName: (context) => const OrderDetailPage(),
           BuyOrderDetailPage.routeName: (context) => const BuyOrderDetailPage(),
-          RateItemPage.routeName: (context) =>  const RateItemPage()
+          RateItemPage.routeName: (context) => const RateItemPage()
         },
         title: 'Flutter Demo',
         theme: ThemeData(
@@ -111,12 +115,11 @@ class _MyAppState extends State<MyApp> {
                 if (snapshot.data is bool) {
                   return const LoginPage();
                 } else if (snapshot.data is UserModel) {
-                  context.read<LoginBloc>().userModel =
-                      snapshot.data as UserModel;
+                  context.read<LoginBloc>().userModel = snapshot.data;
                   return const ManagerPageHome();
                 }
               }
-              return const Scaffold(body: SizedBox());
+              return const Scaffold(body: Text("isd"));
             }),
       ),
     );
@@ -155,4 +158,13 @@ AlertDialog showdialogLoading(BuildContext context) {
         width: 100,
         child: Center(child: CircularProgressIndicator())),
   );
+}
+
+class EmptyCustom extends StatelessWidget {
+  const EmptyCustom({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Image.asset('assets/img/empty_box.png');
+  }
 }

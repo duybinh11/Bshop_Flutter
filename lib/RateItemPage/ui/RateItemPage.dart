@@ -1,4 +1,4 @@
-import 'package:do_an2_1/Login/bloc/login_bloc.dart';
+import 'package:do_an2_1/BuyOrderDetail/bloc/buy_order_detail_bloc.dart';
 import 'package:do_an2_1/Model/ItemOrderModel.dart';
 import 'package:do_an2_1/RateItemPage/bloc/rate_item_bloc.dart';
 import 'package:flutter/material.dart';
@@ -18,16 +18,17 @@ class _RateItemPageState extends State<RateItemPage> {
   late ItemOrderModel itemOrder;
 
   final commentCtl = TextEditingController();
-  late int idUser;
   final keyForm = GlobalKey<FormState>();
   final rateBloc = RateItemBloc();
-
+  bool isLoad = false;
   @override
   void didChangeDependencies() {
-    idUser = context.read<LoginBloc>().userModel!.id;
-    Map<String, dynamic> mapData =
-        ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>;
-    itemOrder = mapData['item_order'];
+    if (!isLoad) {
+      Map<String, dynamic> mapData =
+          ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>;
+      itemOrder = mapData['item_order'];
+      isLoad = true;
+    }
     super.didChangeDependencies();
   }
 
@@ -40,7 +41,7 @@ class _RateItemPageState extends State<RateItemPage> {
 
   String? validateComment(String? value) {
     if (value!.isEmpty) {
-      return 'Vui lòng đánh gia';
+      return 'Vui lòng đánh giá';
     }
     return null;
   }
@@ -48,9 +49,8 @@ class _RateItemPageState extends State<RateItemPage> {
   void clickRate() {
     if (keyForm.currentState!.validate()) {
       rateBloc.add(ERateItemAdd(
-          idUser: idUser,
-          idOrder: itemOrder.id,
-          idItem: itemOrder.item.id,
+          idOrder: itemOrder.idOrder,
+          idItem: itemOrder.id,
           rateNum: rateNum,
           comment: commentCtl.text));
     }
@@ -74,7 +74,8 @@ class _RateItemPageState extends State<RateItemPage> {
             return const Center(child: Text('erorr'));
           }
           if (state is SRateItemSuccess) {
-            return const Center(child: Text('thanh conong'));
+            context.read<BuyOrderDetailBloc>().add(EBuyOrderDetailRated());
+            return const Center(child: Text('Đánh Giá thành công'));
           }
           return Center(
             child: Padding(
@@ -103,7 +104,7 @@ class _RateItemPageState extends State<RateItemPage> {
                       controller: commentCtl,
                       validator: validateComment,
                       decoration: const InputDecoration(
-                          labelText: 'Email',
+                          labelText: 'Đánh giá',
                           prefixIcon: Icon(
                             Icons.comment_bank,
                             color: Colors.blue,

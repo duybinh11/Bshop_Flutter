@@ -1,3 +1,4 @@
+import 'package:do_an2_1/main.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -22,8 +23,7 @@ class _CartPageState extends State<CartPage>
   }
 
   initCartPage() {
-    int idUser = context.read<LoginBloc>().userModel!.id;
-    context.read<CartBloc>().add(ECartGetallCart(idUser: idUser));
+    context.read<CartBloc>().add(ECartGetallCart());
   }
 
   @override
@@ -58,7 +58,13 @@ class _CartPageState extends State<CartPage>
             return const Center(child: CircularProgressIndicator());
           }
           if (state is SCartEmpty) {
-            return const Text('empty');
+            return RefreshIndicator(
+              child: const Center(child: EmptyCustom()),
+              onRefresh: () {
+                initCartPage();
+                return Future.delayed(const Duration(seconds: 1));
+              },
+            );
           }
           if (state is SCartAllCart) {
             return Scaffold(

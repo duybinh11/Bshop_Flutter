@@ -2,6 +2,7 @@ import 'package:do_an2_1/BuyOrderDetail/bloc/buy_order_detail_bloc.dart';
 import 'package:do_an2_1/BuyOrderDetail/ui/UserCustom.dart';
 import 'package:do_an2_1/Model/BillItemModel.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'BillMoneyCustom.dart';
@@ -28,21 +29,24 @@ class _BuyOrderDetailPageState extends State<BuyOrderDetailPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(title: const Text('Chi Tiet don hang')),
+        appBar: AppBar(
+          title: const Text('Chi Tiet don hang'),
+          actions: [
+            IconButton(
+                onPressed: () {
+                  context.read<BuyOrderDetailBloc>().add(
+                      EBuyOrderDetailGetBillRefresh(idBill: billItemModel.id));
+                },
+                icon: const Icon(Icons.refresh))
+          ],
+        ),
         body: BlocConsumer<BuyOrderDetailBloc, BuyOrderDetailState>(
           listener: (context, state) {
-            // if (state is SBuyOrderDetaiReceivedSuccess) {
-            //   print(billItemModel.listOrder.length);
-            //   for (var element in billItemModel.listOrder) {
-            //     if (element.id == state.idOrder) {
-            //       element.listStatusTransport.add(state.statusAddress);
-            //     }
-            //   }
-            //   print(billItemModel.listOrder.length);
-            // }
+            if (state is SBuyOrderDetailBillRefreshSuccess) {
+              billItemModel = state.billItemModel;
+            }
           },
           builder: (context, state) {
-            
             return Column(
               children: [
                 Column(

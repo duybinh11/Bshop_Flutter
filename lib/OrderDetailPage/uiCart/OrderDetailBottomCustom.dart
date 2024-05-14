@@ -34,8 +34,7 @@ class OrderDetailBottomCustom extends StatelessWidget {
   void order(BuildContext context) {
     String namePay = context.read<OrderDetailBloc>().namePay;
     if (namePay == 'Thanh Toán sau khi nhận hàng') {
-      int idUser = context.read<LoginBloc>().userModel!.id;
-      context.read<OrderDetailBloc>().add(EOrderDetailBuyItem(idUser: idUser));
+      context.read<OrderDetailBloc>().add(EOrderDetailBuyItem());
     } else {
       Navigator.pushNamed(context, VnPayPage.routeName);
     }

@@ -1,4 +1,3 @@
-import 'package:do_an2_1/OrderPage/bloc/order_page_bloc.dart';
 import 'package:flutter/material.dart';
 
 import 'OrderBody.dart';
@@ -12,8 +11,6 @@ class OrderPage extends StatefulWidget {
 }
 
 class _OrderPageState extends State<OrderPage> {
-  late OrderPageBloc orderBloc;
-  @override
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
@@ -21,7 +18,7 @@ class _OrderPageState extends State<OrderPage> {
         child: Scaffold(
           appBar: AppBar(
             title: const Text(
-              'Giỏ hàng',
+              'Đơn Hàng',
               style: TextStyle(
                   fontFamily: 'popins1',
                   color: Colors.blue,

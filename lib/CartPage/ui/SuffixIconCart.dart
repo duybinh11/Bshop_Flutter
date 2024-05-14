@@ -15,7 +15,7 @@ class SuffixIconCart extends StatefulWidget {
 class _SuffixIconCartState extends State<SuffixIconCart> {
   bool selected = false;
   void deleteCart(BuildContext context, int idCart) {
-    int idUser = context.read<LoginBloc>().userModel!.id;
+    int idUser = 1;
     context.read<CartBloc>().add(ECartDelete(idCart: idCart, idUser: idUser));
   }
 

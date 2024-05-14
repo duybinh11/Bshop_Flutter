@@ -24,9 +24,8 @@ class EVnPayAddVnpay extends VnPayEvent {
 }
 
 class EVnPayAddVnpayBuyItem extends VnPayEvent {
-  int idUser;
   OrderDetailBloc orderDetailBloc;
-  EVnPayAddVnpayBuyItem({required this.idUser, required this.orderDetailBloc});
+  EVnPayAddVnpayBuyItem({required this.orderDetailBloc});
 }
 
 class EVnpayUpdateBill extends VnPayEvent {}

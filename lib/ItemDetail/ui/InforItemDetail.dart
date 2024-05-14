@@ -240,7 +240,7 @@ class CostItemDetail extends StatelessWidget {
             ),
             flashSaleModel == null
                 ? Text(
-                    '${formatter.format(itemModel.price)}k',
+                    '${formatter.format(itemModel.price)}VND',
                     style: const TextStyle(
                         fontFamily: 'Poppins',
                         fontSize: 18,
@@ -250,7 +250,7 @@ class CostItemDetail extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        '${itemModel.price}đ',
+                        '${itemModel.price}VND',
                         style: const TextStyle(
                             fontFamily: 'Poppins',
                             fontSize: 18,
@@ -264,7 +264,7 @@ class CostItemDetail extends StatelessWidget {
                         width: 10,
                       ),
                       Text(
-                        '${formatter.format(itemModel.price * (1 - flashSaleModel!.percent / 100))}k',
+                        '${formatter.format(itemModel.price * (1 - flashSaleModel!.percent / 100))}VND',
                         style: const TextStyle(
                             fontFamily: 'Poppins',
                             fontSize: 18,
